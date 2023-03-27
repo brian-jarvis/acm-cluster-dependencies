@@ -29,9 +29,9 @@ policies:
 
   - name: cluster-machineset-dependency
     remediationAction: enforce
-    dependencies:
-      - name: '{{ $n := split "." (lookup "config.openshift.io/v1" "Infrastructure" "" "cluster").status.apiServerURL }}{{ $clustName := $n._1 }}{{- $clustName -}}{{ "-configmap" }}'
-        compliance: "Compliant"
+    # dependencies:
+    #   - name: '{{ $n := split "." (lookup "config.openshift.io/v1" "Infrastructure" "" "cluster").status.apiServerURL }}{{ $clustName := $n._1 }}{{- $clustName -}}{{ "-configmap" }}'
+    #     compliance: "Compliant"
     placement:
       placementRuleName: "all-clusters"
     manifests:
