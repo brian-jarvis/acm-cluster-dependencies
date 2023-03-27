@@ -4,4 +4,4 @@ metadata:
   name: cluster-machineset-dependency
   namespace: default
 data:
-  replica_bad: '{{ $n := split "." (lookup "config.openshift.io/v1" "Infrastructure" "" "cluster").status.apiServerURL }}{{ $clustName := (list $n._1 "replicas" | join "-") }}{{ fromConfigMap "default" "cluster-ocp-configmap" $clustName  }}'
+  replicas: '{{ $n := split "." (lookup "config.openshift.io/v1" "Infrastructure" "" "cluster").status.apiServerURL }}{{ $clustName := (list $n._1 "replica_bad" | join "-") }}{{ fromConfigMap "default" "cluster-ocp-configmap" $clustName  }}'
