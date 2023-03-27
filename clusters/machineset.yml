@@ -4,4 +4,4 @@ metadata:
   name: cluster-machineset-dependency
   namespace: default
 data:
-  replicas: '{{ $n := split "." (lookup "config.openshift.io/v1" "Infrastructure" "" "cluster").status.apiServerURL }}{{ $clustName := $n._1 }}{{- $clustName -}}{{ fromConfigMap "default" "cluster-ocp-configmap" ($clustName "worker-1a-replicas") | toInt }}'
+  replicas: '{{ $n := split "." (lookup "config.openshift.io/v1" "Infrastructure" "" "cluster").status.apiServerURL }}{{ $clustName := (printf $n._1 "-replicas") }}{{ fromConfigMap "default" "cluster-ocp-configmap" $clustName | toInt }}'
