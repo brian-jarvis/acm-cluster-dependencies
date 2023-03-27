@@ -19,7 +19,7 @@ policies:
       - path: clusters/acm/
 
   - name: bry-configmap
-    remediationAction: inform
+    remediationAction: enforce
     placement:
       placementRuleName: "bry-managed"
     manifests:
