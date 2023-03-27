@@ -5,4 +5,4 @@ metadata:
   namespace: default
 data:
   replicas: '{{ $n := split "." (lookup "config.openshift.io/v1" "Infrastructure" "" "cluster").status.apiServerURL }}{{ $clustName := (printf $n._1 "-replicas") }}{{ fromConfigMap "default" "cluster-ocp-configmap" $clustName  }}'
-  lookup_d: '{{ $n := split "." (lookup "config.openshift.io/v1" "Infrastructure" "" "cluster").status.apiServerURL }}{{ $clustName := (printf (trim $n._1) "-replicas") }}{{ $n._1 }}'
+  lookup_c: '{{ $n := split "." (lookup "config.openshift.io/v1" "Infrastructure" "" "cluster").status.apiServerURL }}{{ $clustName2 := (printf (trim $n._1) "-replicas") }}{{ $clustName2 }}'
