@@ -1,0 +1,1 @@
+This is an example to test if you can template the dependencies on a policy

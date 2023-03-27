@@ -1,0 +1,39 @@
+---
+apiVersion: policy.open-cluster-management.io/v1
+kind: PolicyGenerator
+metadata:
+  name: gen-policy-generator
+policyDefaults:
+  namespace: bry-tam-policies
+  remediationAction: enforce
+  consolidateManifests: false
+placementBindingDefaults:
+  name: "tekton-binding"
+
+policies:
+  - name: acm-configmap
+    remediationAction: inform
+    placement:
+      placementRuleName: "hub-only"
+    manifests:
+      - path: clusters/acm/
+
+  - name: bry-configmap
+    remediationAction: inform
+    placement:
+      placementRuleName: "bry-managed"
+    manifests:
+      - path: clusters/acm/
+
+
+
+  - name: cluster-machineset-dependency
+    remediationAction: enforce
+    dependencies:
+      - name: '{{ $n := split "." (lookup "config.openshift.io/v1" "Infrastructure" "" "cluster").status.apiServerURL }}{{ $clustName := $n._1 }}{{- $clustName -}}{{ "-configmap" }}'
+        compliance: "Compliant"
+    placement:
+      placementRuleName: "all-clusters"
+    manifests:
+      - path: clusters/machineset.yml
+

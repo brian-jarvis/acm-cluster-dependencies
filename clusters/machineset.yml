@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cluster-machineset-dependency
+  namespace: default
+data:
+  replicas: '{{ $n := split "." (lookup "config.openshift.io/v1" "Infrastructure" "" "cluster").status.apiServerURL }}{{ $clustName := $n._1 }}{{- $clustName -}}{{ fromConfigMap "default" "cluster-ocp-configmap" ($clustName "worker-1a-replicas") | toInt }}'

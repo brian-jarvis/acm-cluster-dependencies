@@ -1,0 +1,7 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- hub-only.yml
+- all-clusters.yml
+- bry-managed.yml
+- namespace.yml
